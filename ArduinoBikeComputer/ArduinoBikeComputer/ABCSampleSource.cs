@@ -9,5 +9,12 @@ namespace ArduinoBikeComputer
     {
         event Action<ABCSample> SampleArrived;
 
+        //event EventHandler SampleArrived;
+
     }
+
+    //public class ABCSampleArriveEventArgs : EventArgs
+    //{
+    //    public ABCSample Sample { get; set; }
+    //}
 }

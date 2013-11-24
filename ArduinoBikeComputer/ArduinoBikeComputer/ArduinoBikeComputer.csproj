@@ -98,7 +98,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CmdMessenger\CSharp\CommandMessenger\CommandMessenger.csproj">
+    <ProjectReference Include="..\..\..\CmdMessenger\CSharp\CommandMessenger\CommandMessenger.csproj">
       <Project>{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}</Project>
       <Name>CommandMessenger</Name>
     </ProjectReference>

@@ -22,10 +22,10 @@ namespace ArduinoBikeComputer
             timer = new DispatcherTimer(DispatcherPriority.DataBind);
             timer.Interval = TimeSpan.FromMilliseconds(TIMER_INTERVAL);
 
-            sample.WheelRPM = rnd.NextDouble() * 360.0d;
+            sample.PedalRPM = rnd.NextDouble() * 120.0d;
             
-            sample.WheelTemperature = (rnd.NextDouble() * 60.0d) + 65.0d;
-            
+            sample.WheelTempC = (rnd.NextDouble() * 60.0d) + 20.0d;
+            sample.EnviroTempC = 20.0;
             sample.Time = DateTime.Now;
 
 
@@ -34,15 +34,15 @@ namespace ArduinoBikeComputer
                     lock (_lock)
                     {
                         ABCSample nextSample = new ABCSample();
-                        nextSample.WheelRPM = ((rnd.NextDouble() - 0.5d) * 5.0d) + sample.WheelRPM;
-                        if (nextSample.WheelRPM < 0.0d)
+                        nextSample.PedalRPM = ((rnd.NextDouble() - 0.5d) * 5.0d) + sample.PedalRPM;
+                        if (nextSample.PedalRPM < 0.0d)
                         {
-                            nextSample.WheelRPM = 0.0d;
+                            nextSample.PedalRPM = 0.0d;
                         }
-                        nextSample.WheelTemperature = (rnd.NextDouble() - 0.5d) + sample.WheelTemperature;
-                        if (nextSample.WheelTemperature < 0.0d)
+                        nextSample.WheelTempC = (rnd.NextDouble() - 0.5d) + sample.WheelTempC;
+                        if (nextSample.WheelTempC < 0.0d)
                         {
-                            nextSample.WheelTemperature = 0.0d;
+                            nextSample.WheelTempC = 0.0d;
                         }
                         sample = nextSample; 
                         SampleArrived(sample);

@@ -26,11 +26,13 @@ void setup()
        
 void loop()
 {
-
-  if ( currentTime + tempDelay < millis())
+  long curr = millis();
+  if ( currentTime + tempDelay < curr)
   {
-    Serial.print("### Temp ### ");
-    Serial.println( TemperatureSensing() );
+    Serial.print("### Temp ### W:");
+    Serial.print( TemperatureSensing() );
+    Serial.print("~t:");
+    Serial.println(curr);
     delay(1000); // wait a second before printing again
   }
 }
@@ -77,6 +79,12 @@ void trigger0()
     
     Serial.print( "W:" );
     Serial.print( tempC );
+    Serial.print( "~" );
+    
+    Serial.print( "t:" );
+    Serial.print( currentTime );
+    
+    
     Serial.println();
     
     lastDebounce0 = currentTime;

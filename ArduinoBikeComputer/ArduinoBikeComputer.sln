@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArduinoBikeComputer", "ArduinoBikeComputer\ArduinoBikeComputer.csproj", "{5E495C8C-4DD7-4A37-ADA6-A6E6E22312DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandMessenger", "..\CmdMessenger\CSharp\CommandMessenger\CommandMessenger.csproj", "{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandMessenger", "..\..\CmdMessenger\CSharp\CommandMessenger\CommandMessenger.csproj", "{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ABCTempTableGenerator", "ABCTempTableGenerator\ABCTempTableGenerator.csproj", "{0DFB0276-D5E0-4631-B9D2-3A339357F25B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,16 @@ Global
 		{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3CF8F8FC-6F5C-46F8-94DC-C2E4C505ECA4}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Debug|x86.ActiveCfg = Debug|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Debug|x86.Build.0 = Debug|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Release|Any CPU.ActiveCfg = Release|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Release|Mixed Platforms.Build.0 = Release|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Release|x86.ActiveCfg = Release|x86
+		{0DFB0276-D5E0-4631-B9D2-3A339357F25B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

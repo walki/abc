@@ -39,7 +39,17 @@ namespace ArduinoBikeComputer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            VM = new ABCSampleViewModel(_sampleSource);
+
+            try
+            {
+                VM = new ABCSampleViewModel(_sampleSource);
+                //_sampleSource.SampleArrived += _vm._source_SampleArrived;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("WTF: How? {0}", ex.Message);
+            }
         }
     }
 }

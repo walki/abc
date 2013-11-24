@@ -1,0 +1,11 @@
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\App.g.cs
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator_MarkupCompile.cache
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\MainWindow.baml
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\MainWindow.g.cs
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator.g.resources
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator.Properties.Resources.resources
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator.csproj.GenerateResource.Cache
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\bin\Debug\ABCTempTableGenerator.exe
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\bin\Debug\ABCTempTableGenerator.pdb
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator.exe
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ABCTempTableGenerator\obj\x86\Debug\ABCTempTableGenerator.pdb
