@@ -28,3 +28,5 @@ C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x8
 C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x86\Debug\ArduinoBikeComputer.g.resources
 C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x86\Debug\ArduinoBikeComputer.Properties.Resources.resources
 C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x86\Debug\ArduinoBikeComputer.csproj.GenerateResource.Cache
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x86\Debug\CadenceView.baml
+C:\Users\rjw\Documents\GitHub\abc\ArduinoBikeComputer\ArduinoBikeComputer\obj\x86\Debug\CadenceView.g.cs

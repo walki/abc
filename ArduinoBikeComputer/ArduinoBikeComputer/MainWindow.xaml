@@ -12,6 +12,9 @@
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
             <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.45*" />
@@ -26,6 +29,9 @@
         <TextBlock Grid.Column="0" Grid.Row="4" FontSize="24">Time:</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="5" FontSize="24">Wheel Temp C:</TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="6" FontSize="24">Enviro Temp C:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="7" FontSize="24">Distance:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="8" FontSize="24">Time:</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="9" FontSize="24">Speed:</TextBlock>
 
         <TextBlock Grid.Column="1" Grid.Row="0" FontSize="24" Text="{Binding EnviroTempF, StringFormat={}{0:0.0}}" />
         <TextBlock Grid.Column="1" Grid.Row="1" FontSize="24" Text="{Binding PedalRPM, StringFormat={}{0:0}}"/>
@@ -34,6 +40,9 @@
         <TextBlock Grid.Column="1" Grid.Row="4" FontSize="24" Text="{Binding TimeL}"/>
         <TextBlock Grid.Column="1" Grid.Row="5" FontSize="24" Text="{Binding WheelTempC, StringFormat={}{0:0.00}}"/>
         <TextBlock Grid.Column="1" Grid.Row="6" FontSize="24" Text="{Binding EnviroTempC, StringFormat={}{0:0.0}}"/>
+        <TextBlock Grid.Column="1" Grid.Row="7" FontSize="24" Text="{Binding DistanceMi, StringFormat={}{0:0.000}}"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" FontSize="24" Text="{Binding RidingTime, StringFormat=hh\\:mm\\:ss}"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" FontSize="24" Text="{Binding SpeedMi, StringFormat={}{0:0.0}}"/>
 
         <TextBlock Grid.Column="2" Grid.Row="0" FontSize="24">F</TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="1" FontSize="24">RPM</TextBlock>
@@ -42,6 +51,9 @@
         <TextBlock Grid.Column="2" Grid.Row="4" FontSize="24">ms</TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="5" FontSize="24">C</TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="6" FontSize="24">C</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="7" FontSize="24">Mi</TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="8" FontSize="24"></TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="9" FontSize="24">mph</TextBlock>
 
     </Grid>
 </Window>

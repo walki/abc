@@ -11,17 +11,23 @@ namespace ArduinoBikeComputer
     {
         // Queue Size
         const int N = 15;
+        const long pwrTime = 10000;
+
 
         //Environmental temp...
         Double Tmed = Double.MaxValue;
         Queue<ABCSample> envTempQueue = new Queue<ABCSample>(N);
 
         //Queues For determining Power.
+        Queue<ABCSample> holdingQueue = new Queue<ABCSample>(4*N);
+        ABCSample LastPowerSample = new ABCSample();
         Queue<ABCSample> powerQueueA = new Queue<ABCSample>(N);
         Queue<ABCSample> powerQueueB = new Queue<ABCSample>(N);
         
 
-        //ABCSample sample = new ABCSample();
+        ABCSample LastSample = new ABCSample();
+        ABCSample FirstMovingSample = null;
+
         private readonly Object _lock = new Object();
         // This is only to generate the Cadence value for now.
         private Random rnd = new Random();
@@ -68,6 +74,10 @@ namespace ArduinoBikeComputer
                     // Consider moving this to the ABCSample after receiving the line!
                     ABCSample nextSample = new ABCSample(line);
 
+
+
+
+
                     // If we aren't getting environmental data from the arduino, we are going to use the lowest found!
                     if (nextSample.EnviroTempC == 0.0d)
                     {
@@ -80,10 +90,40 @@ namespace ArduinoBikeComputer
                         nextSample = CalculatePower(nextSample);
                     }
 
+
+
+                    // Time, Speed and Distance 
+                    if (FirstMovingSample == null && nextSample.PedalRPM > 0.0d)
+                    {
+                        FirstMovingSample = nextSample;
+                    }
+
+                    if (FirstMovingSample != null)
+                    {
+                        nextSample.FirstTimeL = FirstMovingSample.TimeL;
+                    }
+                    else
+                    {
+                        nextSample.FirstTimeL = nextSample.TimeL;
+                    }
+
+
+                    nextSample.LastTimeL = LastSample.TimeL;
+
+                    if (nextSample.PedalRPM > 0.0)
+                    {
+                        nextSample.RevCount = LastSample.RevCount + 1;
+                    }
+                    else
+                    {
+                        nextSample.RevCount = LastSample.RevCount;
+                    }
+
                     // notify any subscribers to this of the this sample....
                     SampleArrived(nextSample);
 
-
+                    // Keep this guy for the T/S/D calcs
+                    LastSample = nextSample;
 
                     // Write the sample out and get the next...
                     using (file = new StreamWriter(filename, true))
@@ -114,66 +154,81 @@ namespace ArduinoBikeComputer
 
         private ABCSample CalculatePower(ABCSample sample)
         {
-            while(powerQueueA.Count >= N)
+
+            holdingQueue.Enqueue(sample);
+            ABCSample oldest = holdingQueue.Peek();
+            if (sample.TimeL - oldest.TimeL > pwrTime/2)
             {
-                // get rid of the old data
-                powerQueueA.Dequeue();
-            }
+                //clear any existing...
+                powerQueueA.Clear();
+                powerQueueB.Clear();
 
-            while (powerQueueB.Count >= N)
-            {
-                powerQueueA.Enqueue(powerQueueB.Dequeue());
-            }
-
-            //From Experimental data, it appears that we lose ~.2 deg C when the wheel is moving.
-            // I'm guessing that this is due to the movign air causing the reading to be different, not actually different surface temp.
-            // so lets' help that:
-            if (sample.PedalRPM > 10.0d)
-            {
-                sample.WheelTempC += 0.2d;
-            }
-            // making sure that the Power Queues get this value!
-
-            powerQueueB.Enqueue(sample);
-
-            //get average Temp and Time for each queue, once we've got data into both queues, means no power until N+1 samples.
-            if (powerQueueA.Count > 0)
-            {
-                Double avgTempA = powerQueueA.Average(Sample => Sample.WheelTempC);
-                Double avgTimeA = powerQueueA.Average(Sample => Sample.TimeL);
-                Double avgTempB = powerQueueB.Average(Sample => Sample.WheelTempC);
-                Double avgTimeB = powerQueueB.Average(Sample => Sample.TimeL);
-
-
-
-                Double delt = avgTimeB - avgTimeA;
-                Double delT = avgTempB - avgTempA;
-
-                // Energy from the differences between the Averages of the 2 sets
-                // using specific heat of Steel = 0.49 kJ/KgC
-                // (40 lbs / 2.2 lbs/kg) * 0.49 kJ / kgC = 8.90909
-                // Q = m * c * delT
-                Double QI = 8.90909d * delT;
-
-                // Energy that would have been lost due to Cooling towards the air temparture Tm
-                // T (expected loss) = Tm + ( T0 - Tm) * e^(kt)  k ~= -2.29 * 10 ^-7 using experimentation. t0 = avgTempA, t1 = avgTempB
-                Double Tel = Tmed + (avgTempA - Tmed) * (Math.Exp(-0.000000229d * delt));
-                Double Qel = 8.90909d * (avgTempA - Tel);
-
-                // Power = Qtot in kJ / del t in ms * 1000 ms/s * 1000 J / kJ => J/s => W
-                // but lets not give credit for Power if the cadence == 0...
-
-                if (sample.PedalRPM > 0)
+                // all the samples from oldest to pwrTime / 2 into Q_A;
+                while (holdingQueue.Peek().TimeL < (pwrTime / 2) + oldest.TimeL)
                 {
-                    sample.Power = (QI + Qel) / delt * 1000000.0d;
-
-                    // Now lets actually set this to the average including this one...
-                    Double avgPwrB = powerQueueB.Average(Sample => Sample.Power);
-                    // This stuff is reliant on that we don't start calc'ing power until we have at least one element in QueueA.
-                    sample.Power = (avgPwrB * (N - 1) + sample.Power) / N;
+                    powerQueueA.Enqueue(holdingQueue.Dequeue());
                 }
-                powerQueueB.ElementAt(N - 1).Power = sample.Power;
+
+                // all the samples from pwrTime / 2 to the newest intp Q_B;
+                while (holdingQueue.Count > 0)
+                {
+                    powerQueueB.Enqueue(holdingQueue.Dequeue());
+                }
+
+                //From Experimental data, it appears that we lose ~.2 deg C when the wheel is moving.
+                // I'm guessing that this is due to the movign air causing the reading to be different, not actually different surface temp.
+                // so lets' help that:
+                //if (sample.PedalRPM > 10.0d)
+                //{
+                //    sample.WheelTempC += 0.2d;
+                //}
+                // making sure that the Power Queues get this value!
+                
+                if (powerQueueA.Count > 0)
+                {
+                    Double avgTempA = powerQueueA.Average(Sample => Sample.WheelTempC);
+                    Double avgTimeA = powerQueueA.Average(Sample => Sample.TimeL);
+                    Double avgTempB = powerQueueB.Average(Sample => Sample.WheelTempC);
+                    Double avgTimeB = powerQueueB.Average(Sample => Sample.TimeL);
+
+
+
+                    Double delt = avgTimeB - avgTimeA;
+                    Double delT = avgTempB - avgTempA;
+
+                    // Energy from the differences between the Averages of the 2 sets
+                    // using specific heat of Steel = 0.49 kJ/KgC
+                    // (40 lbs / 2.2 lbs/kg) * 0.49 kJ / kgC = 8.90909
+                    // Q = m * c * delT
+                    Double QI = 8.90909d * delT;
+
+                    // Energy that would have been lost due to Cooling towards the air temparture Tm
+                    // T (expected loss) = Tm + ( T0 - Tm) * e^(kt)  k ~= -2.29 * 10 ^-7 using experimentation. t0 = avgTempA, t1 = avgTempB
+                    Double Tel = Tmed + (avgTempA - Tmed) * (Math.Exp(-0.000000229d * delt));
+                    Double Qel = 8.90909d * (avgTempA - Tel);
+
+                    // Power = Qtot in kJ / del t in ms * 1000 ms/s * 1000 J / kJ => J/s => W
+                    // but lets not give credit for Power if the cadence == 0...
+                    if (sample.PedalRPM > 0)
+                    {
+                        sample.Power = (QI + Qel) / delt * 1000000.0d;
+                        LastPowerSample = sample;
+                    }
+
+                }
+
+                //Lets put all from queue B back into holding
+                while (powerQueueB.Count > 0)
+                {
+                    holdingQueue.Enqueue(powerQueueB.Dequeue());
+                }
+
             }
+            else
+            {
+                sample.Power = LastPowerSample.Power;
+            }
+
             return sample;
         }
 

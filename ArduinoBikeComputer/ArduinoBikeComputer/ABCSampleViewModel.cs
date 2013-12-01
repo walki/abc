@@ -35,6 +35,13 @@ namespace ArduinoBikeComputer
                     this.EnviroTempF = sample.EnviroTempF;
                     this.Time = sample.Time;
                     this.TimeL = sample.TimeL;
+                    this.DistanceKm = sample.DistanceKm;
+                    this.DistanceMi = sample.DistanceMi;
+                    this.RidingTime = sample.TimeRiding;
+                    this.SpeedKm = sample.SpeedKm;
+                    this.SpeedMi = sample.SpeedMi;
+
+                    
                 }
                 else
                 {
@@ -48,6 +55,12 @@ namespace ArduinoBikeComputer
                         this.EnviroTempF = sample.EnviroTempF;
                         this.Time = sample.Time;
                         this.TimeL = sample.TimeL;
+                        this.DistanceKm = sample.DistanceKm;
+                        this.DistanceMi = sample.DistanceMi;
+                        this.RidingTime = sample.TimeRiding;
+                        this.SpeedKm = sample.SpeedKm;
+                        this.SpeedMi = sample.SpeedMi;
+
                     });
                 }
             }
@@ -143,6 +156,74 @@ namespace ArduinoBikeComputer
         // Using a DependencyProperty as the backing store for TimeL.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TimeLProperty =
             DependencyProperty.Register("TimeL", typeof(long), typeof(ABCSampleViewModel), new UIPropertyMetadata(0L));
+
+
+        public Double SpeedKm
+        {
+            get { return (Double)GetValue(SpeedKmProperty); }
+            set { SetValue(SpeedKmProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SpeedKm.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SpeedKmProperty =
+            DependencyProperty.Register("SpeedKm", typeof(Double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0d));
+
+
+        public Double SpeedMi
+        {
+            get { return (Double)GetValue(SpeedMiProperty); }
+            set { SetValue(SpeedMiProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SpeedMi.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SpeedMiProperty =
+            DependencyProperty.Register("SpeedMi", typeof(Double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0d));
+
+
+
+
+        public Double DistanceKm
+        {
+            get { return (Double)GetValue(DistanceKmProperty); }
+            set { SetValue(DistanceKmProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DistanceKm.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DistanceKmProperty =
+            DependencyProperty.Register("DistanceKm", typeof(Double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0));
+
+
+
+        public Double DistanceMi
+        {
+            get { return (Double)GetValue(DistanceMiProperty); }
+            set { SetValue(DistanceMiProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DistanceMi.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DistanceMiProperty =
+            DependencyProperty.Register("DistanceMi", typeof(Double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0d));
+
+
+
+        public TimeSpan RidingTime
+        {
+            get { return (TimeSpan)GetValue(RidingTimeProperty); }
+            set { SetValue(RidingTimeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RidingTime.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RidingTimeProperty =
+            DependencyProperty.Register("RidingTime", typeof(TimeSpan), typeof(ABCSampleViewModel), new UIPropertyMetadata(TimeSpan.Zero));
+
+        
+
+        
+
+        
+        
+
+        
 
         #endregion
 

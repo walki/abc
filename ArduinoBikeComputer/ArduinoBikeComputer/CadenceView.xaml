@@ -1,0 +1,72 @@
+﻿<Window x:Class="ArduinoBikeComputer.CadenceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CadenceView" Height="240" Width="400" Loaded="Window_Loaded">
+    <StackPanel Orientation="Vertical">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontSize="72"  Text="{Binding PedalRPM, StringFormat={}{0:0}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Column="1"  FontSize="20" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">rpm</TextBlock>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="28"  Text="{Binding SpeedMi, StringFormat={}{0:0.0}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"  FontSize="12" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">mph</TextBlock>
+            </Grid>
+            <TextBlock Grid.Column="1" FontSize="28"  Text="{Binding RidingTime, StringFormat=hh\\:mm\\:ss}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="28"  Text="{Binding DistanceMi, StringFormat={}{0:0.00}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"  FontSize="12" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">mi</TextBlock>
+            </Grid>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="32"  Text="{Binding Power, StringFormat={}{0:0.0}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"  FontSize="20" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">W</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="28"  Text="{Binding EnviroTempF, StringFormat={}{0:0.00}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"  FontSize="12" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">&#186;F</TextBlock>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="28"  Text="{Binding WheelTempF, StringFormat={}{0:0.00}}" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <TextBlock Grid.Column="1"  FontSize="12" TextAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Bottom">&#186;F</TextBlock>
+            </Grid>
+        </Grid>
+    </StackPanel>
+</Window>

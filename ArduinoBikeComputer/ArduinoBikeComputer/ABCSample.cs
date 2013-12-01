@@ -17,7 +17,23 @@ namespace ArduinoBikeComputer
         public double EnviroTempC { get; set; }
         public double EnviroTempF { get { return 1.8 * EnviroTempC + 32.0; } }
         public DateTime Time { get; set; }
+        
         public long TimeL { get; set; }     // milliseconds since start of arduino. this might be different from the file version.... ewhich might be an offset since start of recording?
+        public long LastTimeL { get; set; }
+        public long FirstTimeL { get; set; }
+
+        public long RevCount { get; set; }
+        public Double DistanceKm { get { return RevCount * 0.00179767; } }  // Dist = 2*pi*r * Chain ring size / rear sprockect size -> distance tarvalled per pedal rev.
+                                                                            // D = 680 mm * pi * 50 T / 19 T = 5621.8 mm
+                                                                            // PedalRev to WheelRev -> 22/68.8  => 1797.67 mm
+        public Double DistanceMi { get { return DistanceKm / 1.60934;  } }
+
+        public Double SpeedKm { get { return PedalRPM > 0.0d ? 5.6128 * PedalRPM * 60.0 / 1000.0 : 0.0d; } }
+        public Double SpeedMi { get { return SpeedKm / 1.60934; } }
+
+
+        public TimeSpan TimeRiding { get { return new TimeSpan(0, 0, 0, 0, (int)(TimeL - FirstTimeL)); } }
+
 
         #endregion
 
