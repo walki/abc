@@ -13,6 +13,7 @@ namespace ArduinoBikeComputer
         public double WheelTempF { get { return 1.8 * WheelTempC + 32.0; }  }
         
         public double Power { get; set; }
+        public double AveragePower { get; set; }
 
         public double EnviroTempC { get; set; }
         public double EnviroTempF { get { return 1.8 * EnviroTempC + 32.0; } }

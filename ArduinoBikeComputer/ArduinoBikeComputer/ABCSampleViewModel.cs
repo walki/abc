@@ -31,6 +31,7 @@ namespace ArduinoBikeComputer
                     this.WheelTempC = sample.WheelTempC;
                     this.WheelTempF = sample.WheelTempF;
                     this.Power = sample.Power;
+                    this.AveragePower = sample.AveragePower;
                     this.EnviroTempC = sample.EnviroTempC;
                     this.EnviroTempF = sample.EnviroTempF;
                     this.Time = sample.Time;
@@ -51,6 +52,7 @@ namespace ArduinoBikeComputer
                         this.WheelTempC = sample.WheelTempC;
                         this.WheelTempF = sample.WheelTempF;
                         this.Power = sample.Power;
+                        this.AveragePower = sample.AveragePower;
                         this.EnviroTempC = sample.EnviroTempC;
                         this.EnviroTempF = sample.EnviroTempF;
                         this.Time = sample.Time;
@@ -112,6 +114,19 @@ namespace ArduinoBikeComputer
         public static readonly DependencyProperty PowerProperty =
             DependencyProperty.Register("Power", typeof(double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0d));
 
+
+
+        public double AveragePower
+        {
+            get { return (double)GetValue(AveragePowerProperty); }
+            set { SetValue(AveragePowerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AveragePower.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AveragePowerProperty =
+            DependencyProperty.Register("AveragePower", typeof(double), typeof(ABCSampleViewModel), new UIPropertyMetadata(0.0d));
+
+        
         
         public double EnviroTempC
         {
